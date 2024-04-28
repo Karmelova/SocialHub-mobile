@@ -6,11 +6,13 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import NavbarTop from "./common/NavbarTop";
 import MainTabs  from "./common/MainTabs";
+import { StatusBar } from "react-native";
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => (
   <NavigationContainer>
+    <StatusBar style="light" />
     <Stack.Navigator>
       <Stack.Screen
         name="Navigation"

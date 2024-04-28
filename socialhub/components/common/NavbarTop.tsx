@@ -5,16 +5,17 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 const NavbarTop = () => {
   return (
     <View
+    
       style={{
-        paddingTop: 30,
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
         padding: 10,
-        backgroundColor: "lightgrey",
+        backgroundColor: "#211338",
       }}
     >
-      <MaterialCommunityIcons name="state-machine" color={'#d62246'} size={26} />
+      
+      <MaterialCommunityIcons name="state-machine" color={'#d62246'} size={40} />
 
       {/* Search Bar */}
       <View
