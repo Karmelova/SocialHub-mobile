@@ -10,7 +10,7 @@ import Home from "../routes/Home";
 import Posts from "../routes/Posts";
 import Albums from "../routes/Albums";
 import Users from "../routes/Users";
-import Register from "../routes/Register";
+import Login from "../routes/Login";
 
 const Tab = createBottomTabNavigator();
 
@@ -18,10 +18,8 @@ const MainTabs = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      
       screenOptions={{
-        tabBarStyle: { height: 60},
-        
+        tabBarStyle: { height: 60 },
       }}
       //@ts-ignore
       tabBarOptions={{
@@ -42,13 +40,11 @@ const MainTabs = () => {
           ),
           unmountOnBlur: true,
           headerShown: false,
-          tabBarActiveTintColor: '#d62246',
-          tabBarInactiveTintColor: 'lightgray',
-          tabBarInactiveBackgroundColor:'#211338',
-          tabBarActiveBackgroundColor:'#211338',
-          
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
         }}
-        
       />
       <Tab.Screen
         name="Posts"
@@ -60,10 +56,11 @@ const MainTabs = () => {
           ),
           unmountOnBlur: true,
           headerShown: false,
-          tabBarActiveTintColor: '#d62246',
-          tabBarInactiveTintColor: 'lightgray',
-          tabBarInactiveBackgroundColor:'#211338',
-          tabBarActiveBackgroundColor:'#211338'
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
+          
         }}
       />
       <Tab.Screen
@@ -76,10 +73,10 @@ const MainTabs = () => {
           ),
           unmountOnBlur: true,
           headerShown: false,
-          tabBarActiveTintColor: '#d62246',
-          tabBarInactiveTintColor: 'lightgray',
-          tabBarInactiveBackgroundColor:'#211338',
-          tabBarActiveBackgroundColor:'#211338'
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
         }}
       />
       <Tab.Screen
@@ -92,12 +89,30 @@ const MainTabs = () => {
           ),
           unmountOnBlur: true,
           headerShown: false,
-          tabBarActiveTintColor: '#d62246',
-          tabBarInactiveTintColor: 'lightgray',
-          tabBarInactiveBackgroundColor:'#211338',
-          tabBarActiveBackgroundColor:'#211338'
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
         }}
       />
+      <Tab.Screen
+        name="Login"
+        component={Login}
+        options={{
+          tabBarLabel: "log",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+          unmountOnBlur: true,
+          headerShown: false,
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
+          tabBarButton: () => null,
+        }}
+      />
+      
     </Tab.Navigator>
   );
 };

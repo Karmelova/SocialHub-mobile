@@ -1,24 +1,29 @@
 // Navigation
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, NavigationProp } from "@react-navigation/native";
 
 
 import NavbarTop from "./common/NavbarTop";
-import MainTabs  from "./common/MainTabs";
+import MainTabs from "./common/MainTabs";
 import { StatusBar } from "react-native";
+import Login from "./routes/Login";
 
 const Stack = createStackNavigator();
+const NestedStack = createStackNavigator();
+export type ScreenNames = ["Login", "Auth"] // type these manually
+export type RootStackParamList = Record<ScreenNames[number], undefined>;
+export type StackNavigation = NavigationProp<RootStackParamList>;
 
 const AppNavigator = () => (
   <NavigationContainer>
-    <StatusBar/>
+    <StatusBar />
+    <NavbarTop></NavbarTop>
     <Stack.Navigator>
       <Stack.Screen
         name="Navigation"
         component={MainTabs}
-        options={{ header: () => <NavbarTop /> }}
-        
+        options={{ header: () => '' }}
       />
     </Stack.Navigator>
   </NavigationContainer>

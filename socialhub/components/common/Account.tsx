@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 import { Avatar } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function Account() {
+
+    const navigation = useNavigation();
+    // @ts-expect-error
+    const handleOnNavigate = () => navigation.navigate("Login");
   // State to track if the user is logged in
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -29,7 +35,7 @@ export default function Account() {
       ) : (
         // If user is not logged in, display Login button
         <TouchableOpacity
-          onPress={handleLogin}
+        onPress={handleOnNavigate}
           style={{ backgroundColor: "#d62246", padding: 8, borderRadius: 8 }}
         >
           <Text style={{ color: "white" }}>LOGIN</Text>

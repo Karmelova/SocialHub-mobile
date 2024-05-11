@@ -7,31 +7,14 @@ function StringAvatar(props) {
 return(
     <View>
         <Avatar
-  size="small"
-  rounded
-  title="MT"
-  onPress={() => console.log("Works!")}
-  activeOpacity={0.7}
-/>
-<Avatar
-  size="medium"
-  title="BP"
-  onPress={() => console.log("Works!")}
-  activeOpacity={0.7}
-/>
-<Avatar
-  size="large"
-  title="LW"
-  onPress={() => console.log("Works!")}
-  activeOpacity={0.7}
-/>
-<Avatar
-  size="xlarge"
-  rounded
-  title="CR"
-  onPress={() => console.log("Works!")}
-  activeOpacity={0.7}
-/>
+          rounded
+          size="small"
+          title="BP"
+          onPress={() => console.log("Avatar pressed")}
+          activeOpacity={0.7}
+          containerStyle={{}}
+          overlayContainerStyle={{ backgroundColor: "#d62246" }}
+        />
     </View>
 );
 }

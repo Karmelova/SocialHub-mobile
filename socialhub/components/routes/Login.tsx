@@ -8,7 +8,7 @@ import {
   Text,
 } from "react-native";
 
-const Register = () => {
+export default function Login() {
   return (
     <View style={styles.container}>
       <View style={styles.formContainer}>
@@ -61,5 +61,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
-export default Register;
