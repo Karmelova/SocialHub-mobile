@@ -1,5 +1,8 @@
 import React from "react";
 import { ScrollView, Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import StringAvatar from "../common/StringAvatar";
+import { Avatar } from "react-native-elements";
 
 export default function Home() {
   return(<ScrollView>
@@ -48,6 +51,32 @@ export default function Home() {
       Lorem Ipsum is therefore always free from repetition, injected humour, or
       non-characteristic words etc.
     </Text>
+    <Avatar
+  size="small"
+  rounded
+  title="MT"
+  onPress={() => console.log("Works!")}
+  activeOpacity={0.7}
+/>
+<Avatar
+  size="medium"
+  title="BP"
+  onPress={() => console.log("Works!")}
+  activeOpacity={0.7}
+/>
+<Avatar
+  size="large"
+  title="LW"
+  onPress={() => console.log("Works!")}
+  activeOpacity={0.7}
+/>
+<Avatar
+  size="xlarge"
+  rounded
+  title="CR"
+  onPress={() => console.log("Works!")}
+  activeOpacity={0.7}
+/>
   </ScrollView>);
  ;
 }
