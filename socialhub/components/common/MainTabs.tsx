@@ -1,64 +1,121 @@
-import React from "react";
+import React, { useState } from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import {
+  createBottomTabNavigator,
+  BottomTabNavigationOptions,
+} from "@react-navigation/bottom-tabs";
 
 // Screens
 import Home from "../routes/Home";
 import Posts from "../routes/Posts";
 import Albums from "../routes/Albums";
 import Users from "../routes/Users";
+import Register from "../routes/Register";
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
-const MainTabs = () => (
-  <Tab.Navigator
-    initialRouteName="Home"
-    activeColor="#d62246"
-    inactiveColor="#fff"
-    barStyle={{ backgroundColor: "#211338" }}
-    shifting={true}
-  >
-    <Tab.Screen
-      name="Home"
-      component={Home}
-      options={{
-        tabBarLabel: "Home",
-        tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="home" color={color} size={26}/>
-        ),
+const MainTabs = () => {
+  return (
+    <Tab.Navigator
+      initialRouteName="Home"
+      
+      // @ts-ignore
+      tabBarOptions={{
+        showLabel: false,
+        tabBarActiveTintColor: '#d62246',
+        tabBarInactiveTintColor: 'gray',
+        style:{
+          background: 'black'
+        }
       }}
-    />
-    <Tab.Screen
-      name="Posts"
-      component={Posts}
-      options={{
-        tabBarLabel: "Posts",
-        tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="dots-grid" color={color} size={26} />
-        ),
+      tabBarStyle={{
+        backgroundColor: 'black'
       }}
-    />
-    <Tab.Screen
-      name="Albums"
-      component={Albums}
-      options={{
-        tabBarLabel: "Albums",
-        tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="image" color={color} size={26} />
-        ),
-      }}
-    />
-    <Tab.Screen
-      name="Users"
-      component={Users}
-      options={{
-        tabBarLabel: "Users",
-        tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="account" color={color} size={26} />
-        ),
-      }}
-    />
-  </Tab.Navigator>
-);
+    >
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarActiveBackgroundColor: "211338",
+          tabBarLabel: "Home",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home" color={color} size={26} />
+          ),
+          unmountOnBlur: true,
+          headerShown: false,
+          tabBarActiveTintColor: '#d62246',
+          tabBarInactiveTintColor: 'lightgray',
+          tabBarInactiveBackgroundColor:'#211338',
+          tabBarActiveBackgroundColor:'#211338'
+          
+        }}
+      />
+      <Tab.Screen
+        name="Posts"
+        component={Posts}
+        options={{
+          tabBarLabel: "Posts",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="dots-grid" color={color} size={26} />
+          ),
+          unmountOnBlur: true,
+          headerShown: false,
+          tabBarActiveTintColor: '#d62246',
+          tabBarInactiveTintColor: 'lightgray',
+          tabBarInactiveBackgroundColor:'#211338',
+          tabBarActiveBackgroundColor:'#211338'
+        }}
+      />
+      <Tab.Screen
+        name="Albums"
+        component={Albums}
+        options={{
+          tabBarLabel: "Albums",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="image" color={color} size={26} />
+          ),
+          unmountOnBlur: true,
+          headerShown: false,
+          tabBarActiveTintColor: '#d62246',
+          tabBarInactiveTintColor: 'lightgray',
+          tabBarInactiveBackgroundColor:'#211338',
+          tabBarActiveBackgroundColor:'#211338'
+        }}
+      />
+      <Tab.Screen
+        name="Register"
+        component={Register}
+        options={{
+          tabBarLabel: "register",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="image" color={color} size={26} />
+          ),
+          unmountOnBlur: true,
+          headerShown: false,
+          tabBarActiveTintColor: '#d62246',
+          tabBarInactiveTintColor: 'lightgray',
+          tabBarInactiveBackgroundColor:'#211338',
+          tabBarActiveBackgroundColor:'#211338'
+        }}
+      />
+      <Tab.Screen
+        name="Users"
+        component={Users}
+        options={{
+          tabBarLabel: "Users",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+          unmountOnBlur: true,
+          headerShown: false,
+          tabBarActiveTintColor: '#d62246',
+          tabBarInactiveTintColor: 'lightgray',
+          tabBarInactiveBackgroundColor:'#211338',
+          tabBarActiveBackgroundColor:'#211338'
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
 
 export default MainTabs;
