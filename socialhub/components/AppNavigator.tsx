@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 
 const AppNavigator = () => (
   <NavigationContainer>
-    <StatusBar style="light" />
+    <StatusBar/>
     <Stack.Navigator>
       <Stack.Screen
         name="Navigation"
