@@ -1,11 +1,12 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import StringAvatar from "./StringAvatar";
+import { Avatar, Button } from "react-native-elements";
 
 const NavbarTop = () => {
   return (
     <View
-    
       style={{
         flexDirection: "row",
         justifyContent: "space-between",
@@ -15,7 +16,12 @@ const NavbarTop = () => {
       }}
     >
       
-      <MaterialCommunityIcons name="state-machine" color={'#d62246'} size={40} />
+      {/* LOGO */}
+      <MaterialCommunityIcons
+        name="state-machine"
+        color={"#d62246"}
+        size={40}
+      />
 
       {/* Search Bar */}
       <View
@@ -23,8 +29,8 @@ const NavbarTop = () => {
           flex: 1,
           backgroundColor: "white",
           borderRadius: 8,
-          paddingHorizontal: 10,
           marginHorizontal: 10,
+          padding: 8
         }}
       >
         {/* Tutaj implementuj swój pasek wyszukiwania */}
@@ -32,9 +38,23 @@ const NavbarTop = () => {
       </View>
 
       {/* User Button (Login/Avatar) */}
-      {/* <TouchableOpacity onPress={(() => navigator("Login"))}>
-        <MaterialCommunityIcons name="account" size={26} />
+      {/* <TouchableOpacity
+        onPress={() => console.log("Button pressed")}
+        style={{ backgroundColor: "#d62246", padding: 8, borderRadius: 8 }}
+      >
+        <Text style={{ color: "white" }}>LOGIN</Text>
       </TouchableOpacity> */}
+      <Avatar
+      rounded
+  size="small"
+  title="BP"
+  onPress={() => console.log("Works!")}
+  activeOpacity={0.7}
+  containerStyle={{}}
+
+  overlayContainerStyle={{backgroundColor: '#d62246'}}
+/>
+      {/* <StringAvatar /> */}
     </View>
   );
 };
