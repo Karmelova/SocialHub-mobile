@@ -26,18 +26,17 @@ const MainTabs = () => {
       //@ts-ignore
       tabBarOptions={{
         labelStyle: {
-          fontSize: 16, // Rozmiar czcionki etykiet
-          fontWeight: "bold", // Pogrubienie czcionki etykiet
-          paddingBottom: 8, // Dodatkowy odstęp od dolnej krawędzi
+          fontSize: 14,
+          fontWeight: "bold",
+          paddingBottom: 8,
         },
-        // Możesz dodać więcej opcji stylizacji paska dolnego tutaj
       }}
     >
       <Tab.Screen
         name="Home"
         component={Home}
         options={{
-          tabBarLabel: "Home",
+          tabBarLabel: "HOME",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
@@ -55,7 +54,7 @@ const MainTabs = () => {
         name="Posts"
         component={Posts}
         options={{
-          tabBarLabel: "Posts",
+          tabBarLabel: "POSTS",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="dots-grid" color={color} size={26} />
           ),
@@ -71,7 +70,7 @@ const MainTabs = () => {
         name="Albums"
         component={Albums}
         options={{
-          tabBarLabel: "Albums",
+          tabBarLabel: "ALBUMS",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="image" color={color} size={26} />
           ),
@@ -87,7 +86,7 @@ const MainTabs = () => {
         name="Users"
         component={Users}
         options={{
-          tabBarLabel: "Users",
+          tabBarLabel: "USERS",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={26} />
           ),

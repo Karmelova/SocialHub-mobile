@@ -1,8 +1,7 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text} from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import StringAvatar from "./StringAvatar";
-import { Avatar, Button } from "react-native-elements";
+import Account from "./Account";
 
 const NavbarTop = () => {
   return (
@@ -36,25 +35,8 @@ const NavbarTop = () => {
         {/* Tutaj implementuj swój pasek wyszukiwania */}
         <Text>Search Bar</Text>
       </View>
-
-      {/* User Button (Login/Avatar) */}
-      {/* <TouchableOpacity
-        onPress={() => console.log("Button pressed")}
-        style={{ backgroundColor: "#d62246", padding: 8, borderRadius: 8 }}
-      >
-        <Text style={{ color: "white" }}>LOGIN</Text>
-      </TouchableOpacity> */}
-      <Avatar
-      rounded
-  size="small"
-  title="BP"
-  onPress={() => console.log("Works!")}
-  activeOpacity={0.7}
-  containerStyle={{}}
-
-  overlayContainerStyle={{backgroundColor: '#d62246'}}
-/>
-      {/* <StringAvatar /> */}
+      {/* LOGIN BUTTON OR PROFILE AVATAR + MENU */}
+      <Account></Account>
     </View>
   );
 };
