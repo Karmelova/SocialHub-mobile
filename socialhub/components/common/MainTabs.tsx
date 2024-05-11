@@ -18,7 +18,20 @@ const MainTabs = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-     
+      
+      screenOptions={{
+        tabBarStyle: { height: 60},
+        
+      }}
+      //@ts-ignore
+      tabBarOptions={{
+        labelStyle: {
+          fontSize: 16, // Rozmiar czcionki etykiet
+          fontWeight: "bold", // Pogrubienie czcionki etykiet
+          paddingBottom: 8, // Dodatkowy odstęp od dolnej krawędzi
+        },
+        // Możesz dodać więcej opcji stylizacji paska dolnego tutaj
+      }}
     >
       <Tab.Screen
         name="Home"
