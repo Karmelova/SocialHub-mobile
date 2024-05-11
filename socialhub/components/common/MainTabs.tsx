@@ -36,7 +36,6 @@ const MainTabs = () => {
         name="Home"
         component={Home}
         options={{
-          tabBarActiveBackgroundColor: "211338",
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
@@ -46,8 +45,7 @@ const MainTabs = () => {
           tabBarActiveTintColor: '#d62246',
           tabBarInactiveTintColor: 'lightgray',
           tabBarInactiveBackgroundColor:'#211338',
-          tabBarActiveBackgroundColor:'#211338'
-          
+          tabBarActiveBackgroundColor:'#211338'          
         }}
       />
       <Tab.Screen
