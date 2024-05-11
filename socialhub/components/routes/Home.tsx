@@ -51,32 +51,7 @@ export default function Home() {
       Lorem Ipsum is therefore always free from repetition, injected humour, or
       non-characteristic words etc.
     </Text>
-    <Avatar
-  size="small"
-  rounded
-  title="MT"
-  onPress={() => console.log("Works!")}
-  activeOpacity={0.7}
-/>
-<Avatar
-  size="medium"
-  title="BP"
-  onPress={() => console.log("Works!")}
-  activeOpacity={0.7}
-/>
-<Avatar
-  size="large"
-  title="LW"
-  onPress={() => console.log("Works!")}
-  activeOpacity={0.7}
-/>
-<Avatar
-  size="xlarge"
-  rounded
-  title="CR"
-  onPress={() => console.log("Works!")}
-  activeOpacity={0.7}
-/>
+   
   </ScrollView>);
  ;
 }
