@@ -18,19 +18,7 @@ const MainTabs = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      
-      // @ts-ignore
-      tabBarOptions={{
-        showLabel: false,
-        tabBarActiveTintColor: '#d62246',
-        tabBarInactiveTintColor: 'gray',
-        style:{
-          background: 'black'
-        }
-      }}
-      tabBarStyle={{
-        backgroundColor: 'black'
-      }}
+     
     >
       <Tab.Screen
         name="Home"
@@ -45,8 +33,10 @@ const MainTabs = () => {
           tabBarActiveTintColor: '#d62246',
           tabBarInactiveTintColor: 'lightgray',
           tabBarInactiveBackgroundColor:'#211338',
-          tabBarActiveBackgroundColor:'#211338'          
+          tabBarActiveBackgroundColor:'#211338',
+          
         }}
+        
       />
       <Tab.Screen
         name="Posts"
@@ -69,22 +59,6 @@ const MainTabs = () => {
         component={Albums}
         options={{
           tabBarLabel: "Albums",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="image" color={color} size={26} />
-          ),
-          unmountOnBlur: true,
-          headerShown: false,
-          tabBarActiveTintColor: '#d62246',
-          tabBarInactiveTintColor: 'lightgray',
-          tabBarInactiveBackgroundColor:'#211338',
-          tabBarActiveBackgroundColor:'#211338'
-        }}
-      />
-      <Tab.Screen
-        name="Register"
-        component={Register}
-        options={{
-          tabBarLabel: "register",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="image" color={color} size={26} />
           ),
