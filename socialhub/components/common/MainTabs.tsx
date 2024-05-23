@@ -10,11 +10,12 @@ import Home from "../routes/Home";
 import Posts from "../routes/Posts";
 import Albums from "../routes/Albums";
 import Users from "../routes/Users";
-import Login from "../routes/Login";
+import LoginForm from "../routes/LoginForm";
 
 const Tab = createBottomTabNavigator();
 
 const MainTabs = () => {
+  
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -60,7 +61,6 @@ const MainTabs = () => {
           tabBarInactiveTintColor: "lightgray",
           tabBarInactiveBackgroundColor: "#211338",
           tabBarActiveBackgroundColor: "#211338",
-          
         }}
       />
       <Tab.Screen
@@ -96,10 +96,10 @@ const MainTabs = () => {
         }}
       />
       <Tab.Screen
-        name="Login"
-        component={Login}
+        name="LoginForm"
+        component={LoginForm}
         options={{
-          tabBarLabel: "log",
+          tabBarLabel: "LoginForm",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={26} />
           ),
@@ -112,7 +112,6 @@ const MainTabs = () => {
           tabBarButton: () => null,
         }}
       />
-      
     </Tab.Navigator>
   );
 };

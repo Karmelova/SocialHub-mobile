@@ -1,6 +1,10 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
+import NavbarTop from "../common/NavbarTop";
 
-export default function Home(){
-    return <Text>Posts</Text>
+export default function Posts(){
+    return (<View>
+    <NavbarTop></NavbarTop>
+    <Text>Posts</Text>
+</View>)
 }
