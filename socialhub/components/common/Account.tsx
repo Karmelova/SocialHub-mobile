@@ -7,13 +7,16 @@ import StringAvatar from "./StringAvatar";
 export default function Account() {
   const navigation = useNavigation();
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
   const [forceReload, setForceReload] = useState(false);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
       const storedEmail = await AsyncStorage.getItem('email');
-      if (storedEmail) {
+      const storedUserId = await AsyncStorage.getItem('userId'); // Pobieranie userId z AsyncStorage
+      if (storedEmail && storedUserId) {
         setLoggedIn(true);
+        setUserId(storedUserId); // Ustawienie userId w stanie
       }
     };
     checkLoginStatus();
@@ -35,15 +38,7 @@ export default function Account() {
       {loggedIn ? (
         // If user is logged in, display Avatar
         <View>
-          <StringAvatar
-            rounded
-            size="small"
-            title="BP"
-            onPress={() => console.log("Avatar pressed")}
-            activeOpacity={0.7}
-            containerStyle={{}}
-            overlayContainerStyle={{ backgroundColor: "#d62246" }}
-          />
+           {userId && <StringAvatar userId={userId} />}
           <TouchableOpacity
             onPress={handleLogout}
             style={{ backgroundColor: "#d62246", padding: 8, borderRadius: 8, marginTop: 10 }}
