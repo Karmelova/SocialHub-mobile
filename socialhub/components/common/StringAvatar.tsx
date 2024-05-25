@@ -7,10 +7,11 @@ import { useNavigation } from '@react-navigation/native';
 interface StringAvatarProps {
   userId: string;
   name: string;
+  size: "small" | "medium" | "large" | "xlarge";
 }
 
 function StringAvatar(props: StringAvatarProps) {
-  const { userId } = props;
+  const { userId, size } = props;
   const user = useGetUser(userId);
   const navigation = useNavigation();
 
@@ -25,7 +26,7 @@ function StringAvatar(props: StringAvatarProps) {
     <View>
       <Avatar
         rounded
-        size="small"
+        size={size}
         title={initials}
         onPress={handleAvatarPress}
         activeOpacity={0.7}
