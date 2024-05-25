@@ -11,6 +11,7 @@ import Posts from "../routes/Posts";
 import Albums from "../routes/Albums";
 import Users from "../routes/Users";
 import LoginForm from "../routes/LoginForm";
+import UserProfile from "../routes/UserProfile";
 
 const Tab = createBottomTabNavigator();
 
@@ -100,6 +101,23 @@ const MainTabs = () => {
         component={LoginForm}
         options={{
           tabBarLabel: "LoginForm",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+          unmountOnBlur: true,
+          headerShown: false,
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
+          tabBarButton: () => null,
+        }}
+      />
+      <Tab.Screen
+        name="UserProfile"
+        component={UserProfile}
+        options={{
+          tabBarLabel: "UserProfile",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={26} />
           ),

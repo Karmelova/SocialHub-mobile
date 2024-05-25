@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import { useGetUser } from '../../api/users/useGetUser';
+import { useNavigation } from '@react-navigation/native';
+
 interface StringAvatarProps {
   userId: string;
 }
@@ -10,6 +12,7 @@ function StringAvatar(props: StringAvatarProps) {
   const { userId } = props;
   const user = useGetUser(userId);
   const [title, setTitle] = useState<string>('NA');
+  const navigation = useNavigation();
 
   useEffect(() => {
     if (user) {
@@ -21,13 +24,18 @@ function StringAvatar(props: StringAvatarProps) {
     }
   }, [user]);
 
+  const handleAvatarPress = () => {
+    //@ts-expect-error
+    navigation.navigate('UserProfile', { userId });
+  };
+
   return (
     <View>
       <Avatar
         rounded
         size="small"
         title={title}
-        onPress={() => console.log('Avatar pressed')}
+        onPress={handleAvatarPress}
         activeOpacity={0.7}
         containerStyle={{}}
         overlayContainerStyle={{ backgroundColor: '#d62246' }}
