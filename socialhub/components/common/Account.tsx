@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, TouchableOpacity, Text } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import StringAvatar from "./StringAvatar";
@@ -8,15 +8,17 @@ export default function Account() {
   const navigation = useNavigation();
   const [loggedIn, setLoggedIn] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
   const [forceReload, setForceReload] = useState(false);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
       const storedEmail = await AsyncStorage.getItem('email');
-      const storedUserId = await AsyncStorage.getItem('userId'); // Pobieranie userId z AsyncStorage
+      const storedUserId = await AsyncStorage.getItem('userId');
+      const storedUserName = await AsyncStorage.getItem('name');
       if (storedEmail && storedUserId) {
         setLoggedIn(true);
-        setUserId(storedUserId); // Ustawienie userId w stanie
+        setUserId(storedUserId);
       }
     };
     checkLoginStatus();
@@ -28,33 +30,57 @@ export default function Account() {
   };
 
   const handleOnNavigate = () => {
-    setForceReload(true); // Trigger the reload
+    setForceReload(true);
     //@ts-expect-error
     navigation.navigate("LoginForm");
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       {loggedIn ? (
-        // If user is logged in, display Avatar
-        <View>
-           {userId && <StringAvatar userId={userId} />}
+        <View style={styles.loggedInContainer}>
+          {userId && <StringAvatar userId={userId} name={userName}/>}
           <TouchableOpacity
             onPress={handleLogout}
-            style={{ backgroundColor: "#d62246", padding: 8, borderRadius: 8, marginTop: 10 }}
+            style={styles.logoutButton}
           >
-            <Text style={{ color: "white" }}>LOGOUT</Text>
+            <Text style={styles.buttonText}>LOGOUT</Text>
           </TouchableOpacity>
         </View>
       ) : (
-        // If user is not logged in, display Login button
         <TouchableOpacity
           onPress={handleOnNavigate}
-          style={{ backgroundColor: "#d62246", padding: 8, borderRadius: 8 }}
+          style={styles.loginButton}
         >
-          <Text style={{ color: "white" }}>LOGIN</Text>
+          <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>
       )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  loggedInContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  loginButton: {
+    backgroundColor: "#d62246",
+    padding: 8,
+    borderRadius: 8,
+  },
+  logoutButton: {
+    backgroundColor: "#d62246",
+    padding: 8,
+    borderRadius: 8,
+    marginLeft: 10,
+  },
+  buttonText: {
+    color: "white",
+  },
+});

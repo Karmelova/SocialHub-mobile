@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import { useGetUser } from '../../api/users/useGetUser';
@@ -6,23 +6,15 @@ import { useNavigation } from '@react-navigation/native';
 
 interface StringAvatarProps {
   userId: string;
+  name: string;
 }
 
 function StringAvatar(props: StringAvatarProps) {
   const { userId } = props;
   const user = useGetUser(userId);
-  const [title, setTitle] = useState<string>('NA');
   const navigation = useNavigation();
 
-  useEffect(() => {
-    if (user) {
-      const initials = user.name
-        .split(' ')
-        .map(word => word.charAt(0))
-        .join('');
-      setTitle(initials);
-    }
-  }, [user]);
+  const initials = user ? user.name.split(' ').map(word => word.charAt(0)).join('') : 'NA';
 
   const handleAvatarPress = () => {
     //@ts-expect-error
@@ -34,7 +26,7 @@ function StringAvatar(props: StringAvatarProps) {
       <Avatar
         rounded
         size="small"
-        title={title}
+        title={initials}
         onPress={handleAvatarPress}
         activeOpacity={0.7}
         containerStyle={{}}
