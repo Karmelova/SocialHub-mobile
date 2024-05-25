@@ -29,14 +29,13 @@ const NavbarTop = () => {
           backgroundColor: "white",
           borderRadius: 8,
           marginHorizontal: 10,
-          padding: 8
+          padding: 8,
         }}
       >
         {/* Tutaj implementuj swój pasek wyszukiwania */}
         <Text>Search Bar</Text>
       </View>
-      {/* LOGIN BUTTON OR PROFILE AVATAR + MENU */}
-      <Account></Account>
+        <Account />
     </View>
   );
 };
