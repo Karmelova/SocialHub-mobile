@@ -39,7 +39,7 @@ export default function Account() {
     <View style={styles.container}>
       {loggedIn ? (
         <View style={styles.loggedInContainer}>
-          {userId && <StringAvatar userId={userId} name={userName} size="small"/>}
+          {userId && <StringAvatar userId={userId} name={userName} color= "#d62246" size="small"/>}
           <TouchableOpacity
             onPress={handleLogout}
             style={styles.logoutButton}

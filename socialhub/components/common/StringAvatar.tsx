@@ -8,10 +8,11 @@ interface StringAvatarProps {
   userId: string;
   name: string;
   size: "small" | "medium" | "large" | "xlarge";
+  color: string;
 }
 
 function StringAvatar(props: StringAvatarProps) {
-  const { userId, size } = props;
+  const { userId, size, color } = props;
   const user = useGetUser(userId);
   const navigation = useNavigation();
 
@@ -31,7 +32,7 @@ function StringAvatar(props: StringAvatarProps) {
         onPress={handleAvatarPress}
         activeOpacity={0.7}
         containerStyle={{}}
-        overlayContainerStyle={{ backgroundColor: '#d62246' }}
+        overlayContainerStyle={{ backgroundColor: color }}
       />
     </View>
   );

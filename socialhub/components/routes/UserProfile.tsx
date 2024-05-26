@@ -31,7 +31,7 @@ export default function UserProfile({ route }) {
         <NavbarTop></NavbarTop>
         <ScrollView>
           <View style={styles.container}>
-            <StringAvatar userId={userId} name={user.name} size="xlarge" />
+            <StringAvatar userId={userId} name={user.name} color= "#d62246" size="xlarge" />
             <View style={styles.centered}>
               <Text style={styles.name}>{user.name}</Text>
               <Text style={styles.username}>@{user.username}</Text>
