@@ -28,7 +28,7 @@ export default function Users() {
   const renderItem = ({ item }) => (
     <Card
     type="user"
-    key={item.id}
+    id={item.id}
     userId={item.id.toString()}
     userName={item.username}
     name={item.name}

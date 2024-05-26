@@ -9,11 +9,7 @@ export default function Albums() {
   const albums = useGetAlbums();
   const users = useGetUsers();
 
-  const onDelete = async (id) => {
-    await fetch(`https://jsonplaceholder.typicode.com/albums/${id}`, {
-      method: "DELETE",
-    });
-  };
+
 
   if (!albums || !users) {
     return (
@@ -34,7 +30,7 @@ export default function Albums() {
           }
           return (
             <Card
-              key={album.id}
+              id={album.id}
               title={album.title}
               type="album"
               userId={album.userId.toString()}

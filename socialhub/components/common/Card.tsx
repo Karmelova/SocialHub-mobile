@@ -2,34 +2,67 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import StringAvatar from "./StringAvatar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
 interface CardProps {
   type: "post" | "album" | "photo" | "user";
-  key: number;
+  id: number;
   userId: string;
   userName: string;
   name: string;
   title?: string;
   description?: string;
   image?: string;
-  onPress?: () => void;
 }
 
 function Card({
   type,
+  id,
   title,
   description,
   image,
-  onPress,
   userId,
   userName,
   name,
 }: CardProps) {
   const [loggedInUserId, setLoggedInUserId] = useState<string | null>(null);
   const [isHidden, setIsHidden] = useState<boolean>(false);
-  const onPressDelete = () => {
+  const navigation = useNavigation();
+
+  const onPressDelete = (type, id) => {
+    switch (type) {
+      case "post":
+        deletePost(id);
+        break;
+      case "album":
+        deleteAlbum(id);
+        break;
+      default:
+        console.error("Unknown type:", type);
+    }
     setIsHidden(true);
     console.log("Card hidden");
+  };
+
+  const deletePost = async (postId) => {
+    try {
+      await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
+        method: "DELETE",
+      });
+      console.log("post deleted");
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
+  const deleteAlbum = async (albumId) => {
+    try {
+      await fetch(`https://jsonplaceholder.typicode.com/albums/${albumId}`, {
+        method: "DELETE",
+      });
+      console.log("album deleted");
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
   };
 
   useEffect(() => {
@@ -44,6 +77,11 @@ function Card({
 
     fetchLoggedInUserId();
   }, []);
+
+  const navigateToPostDetails = () => {
+    //@ts-expect-error
+    navigation.navigate("PostDetails", { id });
+  };
 
   return (
     <>
@@ -81,7 +119,7 @@ function Card({
                 </View>
                 <View style={styles.cardActions}>
                   {type === "post" && (
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={navigateToPostDetails}>
                       <Text style={styles.actionButton}>COMMENTS</Text>
                     </TouchableOpacity>
                   )}
@@ -90,10 +128,10 @@ function Card({
                       <Text style={styles.actionButton}>VIEW PHOTOS</Text>
                     </TouchableOpacity>
                   )}
-                  {loggedInUserId === userId &&(
-                    <TouchableOpacity onPress={onPressDelete}>
-                      <Text style={styles.deleteButton}>DELETE</Text>
-                    </TouchableOpacity>
+                  {loggedInUserId === userId && (
+                    <TouchableOpacity onPress={() => onPressDelete(type, id)}>
+                    <Text style={styles.deleteButton}>DELETE</Text>
+                  </TouchableOpacity>
                   )}
                 </View>
               </View>

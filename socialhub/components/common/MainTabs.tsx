@@ -12,6 +12,7 @@ import Albums from "../routes/Albums";
 import Users from "../routes/Users";
 import LoginForm from "../routes/LoginForm";
 import UserProfile from "../routes/UserProfile";
+import PostDetails from "../routes/PostDetails";
 
 const Tab = createBottomTabNavigator();
 
@@ -132,7 +133,23 @@ const MainTabs = () => {
             tabBarActiveBackgroundColor: "#211338",
             tabBarButton: () => null,
           }}
-        />
+        /><Tab.Screen
+        name="PostDetails"
+        component={PostDetails}
+        options={{
+          tabBarLabel: "PostDetails",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+          unmountOnBlur: true,
+          headerShown: false,
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
+          tabBarButton: () => null,
+        }}
+      />
       </Tab.Navigator>
   );
 };

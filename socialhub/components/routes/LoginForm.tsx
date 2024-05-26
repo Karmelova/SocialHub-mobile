@@ -24,7 +24,7 @@ export default function LoginForm({ navigation}) {
 
   return (
     <View>
-      <NavbarTop></NavbarTop>
+      <NavbarTop />
       <TextInput
         style={styles.input}
         placeholder="Email"

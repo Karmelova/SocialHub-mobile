@@ -27,7 +27,7 @@ function Posts() {
           return (
             <Card
               type="post"
-              key={post.id}
+              id={post.id}
               title={post.title}
               description={post.body}
               userId={user.id.toString()}
