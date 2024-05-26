@@ -9,7 +9,7 @@ interface CardProps {
   userId: string;
   userName: string;
   name: string;
-  title: string;
+  title?: string;
   description?: string;
   image?: string;
   onPress?: () => void;
@@ -57,35 +57,47 @@ function Card({
                 color="lightgray"
                 size="small"
               />
-              <View>
+              <View style={{ flexGrow: 1 }}>
                 <Text>{name}</Text>
                 <Text>@{userName}</Text>
               </View>
-            </View>
-            <View style={styles.cardContent}>
-              {image && <Image source={{ uri: image }} style={styles.image} />}
-              <Text style={styles.title}>{title}</Text>
-              {description && (
-                <Text style={styles.description}>{description}</Text>
-              )}
-            </View>
-            <View style={styles.cardActions}>
-              {type === "post" && (
-                <TouchableOpacity>
-                  <Text style={styles.actionButton}>COMMENTS</Text>
-                </TouchableOpacity>
-              )}
-              {type === "album" && (
-                <TouchableOpacity>
-                  <Text style={styles.actionButton}>VIEW PHOTOS</Text>
-                </TouchableOpacity>
-              )}
-              {loggedInUserId === userId && (
-                <TouchableOpacity onPress={onPressDelete}>
-                  <Text style={styles.deleteButton}>DELETE</Text>
+              {type === "user" && (
+                <TouchableOpacity style={{ alignSelf: "center" }}>
+                  <Text style={styles.actionButton}>VIEW PROFILE</Text>
                 </TouchableOpacity>
               )}
             </View>
+
+            {type !== "user" && (
+              <View>
+                <View style={styles.cardContent}>
+                  {image && (
+                    <Image source={{ uri: image }} style={styles.image} />
+                  )}
+                  <Text style={styles.title}>{title}</Text>
+                  {description && (
+                    <Text style={styles.description}>{description}</Text>
+                  )}
+                </View>
+                <View style={styles.cardActions}>
+                  {type === "post" && (
+                    <TouchableOpacity>
+                      <Text style={styles.actionButton}>COMMENTS</Text>
+                    </TouchableOpacity>
+                  )}
+                  {type === "album" && (
+                    <TouchableOpacity>
+                      <Text style={styles.actionButton}>VIEW PHOTOS</Text>
+                    </TouchableOpacity>
+                  )}
+                  {loggedInUserId === userId && type !== "user" && (
+                    <TouchableOpacity onPress={onPressDelete}>
+                      <Text style={styles.deleteButton}>DELETE</Text>
+                    </TouchableOpacity>
+                  )}
+                </View>
+              </View>
+            )}
           </View>
         </View>
       )}
@@ -119,7 +131,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   cardActions: {
-    marginTop:10,
+    marginTop: 10,
     flexDirection: "row",
     justifyContent: "space-between",
   },
