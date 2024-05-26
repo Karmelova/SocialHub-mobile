@@ -24,6 +24,8 @@ const NavbarTop = () => {
 
       {/* Search Bar */}
       <Searchbar />
+
+      {/* Login/Avatar/Logout */}
       <Account />
     </View>
   );
