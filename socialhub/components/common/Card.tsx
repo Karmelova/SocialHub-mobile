@@ -5,6 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface CardProps {
   type: "post" | "album" | "photo" | "user";
+  key: number;
   userId: string;
   userName: string;
   name: string;
@@ -71,7 +72,12 @@ function Card({
             <View style={styles.cardActions}>
               {type === "post" && (
                 <TouchableOpacity>
-                  <Text>Comments</Text>
+                  <Text style={styles.actionButton}>COMMENTS</Text>
+                </TouchableOpacity>
+              )}
+              {type === "album" && (
+                <TouchableOpacity>
+                  <Text style={styles.actionButton}>VIEW PHOTOS</Text>
                 </TouchableOpacity>
               )}
               {loggedInUserId === userId && (
@@ -113,6 +119,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   cardActions: {
+    marginTop:10,
     flexDirection: "row",
     justifyContent: "space-between",
   },
@@ -129,6 +136,16 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 16,
     color: "#666",
+  },
+  actionButton: {
+    borderRadius: 50,
+    padding: 6,
+    color: "black",
+    fontWeight: "bold",
+    borderWidth: 1,
+    borderColor: "black",
+    borderStyle: "solid",
+    textAlign: "center",
   },
   deleteButton: {
     borderRadius: 50,
