@@ -83,6 +83,11 @@ function Card({
     navigation.navigate("PostDetails", { id });
   };
 
+  const navigateToUserProfile = () => {
+    //@ts-expect-error
+    navigation.navigate("UserProfile", { userId });
+  };
+
   return (
     <>
       {!isHidden && (
@@ -100,7 +105,7 @@ function Card({
                 <Text>@{userName}</Text>
               </View>
               {type === "user" && (
-                <TouchableOpacity style={{ alignSelf: "center" }}>
+                <TouchableOpacity style={{ alignSelf: "center" }}  onPress={navigateToUserProfile}>
                   <Text style={styles.actionButton}>VIEW PROFILE</Text>
                 </TouchableOpacity>
               )}
