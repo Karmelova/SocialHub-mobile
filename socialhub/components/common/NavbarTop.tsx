@@ -1,7 +1,8 @@
 import React from "react";
-import { View, Text} from "react-native";
+import { View, Text } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Account from "./Account";
+import Searchbar from "./Searchbar";
 
 const NavbarTop = () => {
   return (
@@ -14,7 +15,6 @@ const NavbarTop = () => {
         backgroundColor: "#211338",
       }}
     >
-      
       {/* LOGO */}
       <MaterialCommunityIcons
         name="state-machine"
@@ -23,19 +23,8 @@ const NavbarTop = () => {
       />
 
       {/* Search Bar */}
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: "white",
-          borderRadius: 8,
-          marginHorizontal: 10,
-          padding: 8,
-        }}
-      >
-        {/* Tutaj implementuj swój pasek wyszukiwania */}
-        <Text>Search Bar</Text>
-      </View>
-        <Account />
+      <Searchbar />
+      <Account />
     </View>
   );
 };
