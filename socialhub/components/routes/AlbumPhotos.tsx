@@ -4,14 +4,16 @@ import { useGetPhotosByAlbumId } from "../../api/photos/useGetPhotosByAlbumId";
 import { useGetUser } from "../../api/users/useGetUser";
 import { useGetAlbumById } from "../../api/albums/useGetAlbumById";
 import Card from "../common/Card";
+import { FlatList } from "react-native-gesture-handler";
+import NavbarTop from "../common/NavbarTop";
 
 export default function AlbumPhotos({ route }) {
   const { id } = route.params;
   const photos = useGetPhotosByAlbumId(id || "");
-  const albumId = photos && photos.length > 0 ? photos[0].albumId : "";
-  const album = useGetAlbumById(String(albumId));
-  const userId = album ? album.userId : "";
-  const user = useGetUser(String(userId));
+  const albumId = photos && photos.length > 0 ? photos[0].albumId : null;
+  const album = useGetAlbumById(albumId ? String(albumId) : "");
+  const userId = album ? album.userId : null;
+  const user = useGetUser(userId ? String(userId) : "");
 
   if (!photos) {
     return (
@@ -21,26 +23,34 @@ export default function AlbumPhotos({ route }) {
     );
   }
 
-  if (photos[0]) {
+  const renderPhotoItem = ({ item }) => (
+    <Card
+      type="photo"
+      id={item.id}
+      title={item.title}
+      userId={album?.userId?.toString() || ""}
+      name={user?.name || ""}
+      userName={user?.username || ""}
+      description=""
+      image={item.url}
+    />
+  );
+
+  if (photos.length > 0) {
     return (
-      <View style={styles.container}>
-        {photos.map((photo) => (
-          <Card
-            type="photo"
-            id={photo.id}
-            title={photo.title}
-            userId={album?.userId.toString()}
-            name={user?.name}
-            userName={user?.username}
-            description=""
-            image={photo.url}
-          />
-        ))}
+      <View>
+        <NavbarTop />
+        <FlatList
+          data={photos}
+          renderItem={renderPhotoItem}
+          keyExtractor={(item) => item.id.toString()}
+        />
       </View>
     );
   } else {
     return (
-      <View style={styles.container}>
+      <View>
+        <NavbarTop />
         <Text>This album does not contain any photos yet</Text>
       </View>
     );

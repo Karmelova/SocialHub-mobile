@@ -83,11 +83,18 @@ function Card({
     navigation.navigate("PostDetails", { id });
   };
 
+  const navigateToAlbumPhotos = () => {
+    //@ts-expect-error
+    navigation.navigate("AlbumPhotos", { id });
+  };
+
   const navigateToUserProfile = () => {
     //@ts-expect-error
     navigation.navigate("UserProfile", { userId });
   };
 
+
+  
   return (
     <>
       {!isHidden && (
@@ -129,7 +136,7 @@ function Card({
                     </TouchableOpacity>
                   )}
                   {type === "album" && (
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={navigateToAlbumPhotos}>
                       <Text style={styles.actionButton}>VIEW PHOTOS</Text>
                     </TouchableOpacity>
                   )}

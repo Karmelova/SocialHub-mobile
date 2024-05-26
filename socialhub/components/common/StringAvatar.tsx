@@ -16,7 +16,7 @@ function StringAvatar(props: StringAvatarProps) {
   const user = useGetUser(userId);
   const navigation = useNavigation();
 
-  const initials = user ? user.name.split(' ').map(word => word.charAt(0)).join('') : 'NA';
+  const initials = user?.name ? user.name.split(' ').map(word => word.charAt(0)).join('') : 'NA';
 
   const handleAvatarPress = () => {
     //@ts-expect-error
