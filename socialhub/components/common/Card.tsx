@@ -90,7 +90,7 @@ function Card({
                       <Text style={styles.actionButton}>VIEW PHOTOS</Text>
                     </TouchableOpacity>
                   )}
-                  {loggedInUserId === userId && type !== "user" && (
+                  {loggedInUserId === userId &&(
                     <TouchableOpacity onPress={onPressDelete}>
                       <Text style={styles.deleteButton}>DELETE</Text>
                     </TouchableOpacity>
