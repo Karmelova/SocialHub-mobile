@@ -14,6 +14,7 @@ import LoginForm from "../routes/LoginForm";
 import UserProfile from "../routes/UserProfile";
 import PostDetails from "../routes/PostDetails";
 import AlbumPhotos from "../routes/AlbumPhotos";
+import SearchResults from "../routes/SearchResults";
 
 const Tab = createBottomTabNavigator();
 
@@ -154,6 +155,23 @@ const MainTabs = () => {
         component={AlbumPhotos}
         options={{
           tabBarLabel: "AlbumPhotos",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+          unmountOnBlur: true,
+          headerShown: false,
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
+          tabBarButton: () => null,
+        }}
+      />
+      <Tab.Screen
+        name="SearchResults"
+        component={SearchResults}
+        options={{
+          tabBarLabel: "SearchResults",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={26} />
           ),

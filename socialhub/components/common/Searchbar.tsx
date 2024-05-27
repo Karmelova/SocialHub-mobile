@@ -1,36 +1,37 @@
-import React, { useState } from 'react';
-import { View, TextInput } from 'react-native';
-import { Text } from 'react-native-elements';
+// Searchbar.js
+import React, { useState } from "react";
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, Keyboard } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-function Searchbar() {
-  const [searchQuery, setSearchQuery] = useState('');
+const Searchbar = () => {
+  const navigation = useNavigation();
+  const [searchText, setSearchText] = useState("");
 
-  const handleSearch = (text) => {
-    // Update the searchQuery state as the user types
-    setSearchQuery(text);
-
-    // Perform search operations based on the updated searchQuery
-    console.log('Search Query:', text);
-    // You can implement your search logic here, such as filtering data or making API calls
+  const handleSearch = () => {
+    //@ts-expect-error
+    navigation.navigate("SearchResults", { searchText });
+    if (searchText.trim() !== "") {
+      Keyboard.dismiss(); // Dismiss keyboard after navigation
+    }
   };
 
   return (
     <View
-      style={{
-        flex: 1,
-        backgroundColor: 'white',
-        borderRadius: 8,
-        marginHorizontal: 10,
-        padding: 3,
-      }}
+    style={{
+      flex: 1,
+      backgroundColor: 'white',
+      borderRadius: 8,
+      marginHorizontal: 10,
+      padding: 3,
+    }}
     >
       <TextInput
-        onChangeText={handleSearch} // Call handleSearch whenever the text changes
-        value={searchQuery}
         placeholder="Search..."
+        onPress={handleSearch}
+        value={searchText}
       />
     </View>
   );
-}
+};
 
 export default Searchbar;
