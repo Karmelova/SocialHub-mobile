@@ -26,6 +26,8 @@ export default function Account() {
 
   const handleLogout = async () => {
     await AsyncStorage.clear();
+    //@ts-expect-error
+    navigation.navigate("LoginForm");
     setLoggedIn(false);
   };
 

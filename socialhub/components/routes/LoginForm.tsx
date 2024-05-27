@@ -1,66 +1,123 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useGetUsers } from '../../api/users/useGetUsers';
-import NavbarTop from '../common/NavbarTop';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+} from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useGetUsers } from "../../api/users/useGetUsers";
+import NavbarTop from "../common/NavbarTop";
 
-export default function LoginForm({ navigation}) {
+export default function LoginForm({ navigation }) {
   const users = useGetUsers();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
 
   const handleLogin = () => {
-    const currentUser = users.find(user => user.email.toLowerCase() === email.toLowerCase());
+    const currentUser = users.find(
+      (user) => user.email.toLowerCase() === email.toLowerCase()
+    );
     if (currentUser) {
-      AsyncStorage.setItem('userId', currentUser.id.toString());
-      AsyncStorage.setItem('name', currentUser.name);
-      AsyncStorage.setItem('email', currentUser.email.toLowerCase());
-      navigation.navigate('Home');
+      AsyncStorage.setItem("userId", currentUser.id.toString());
+      AsyncStorage.setItem("name", currentUser.name);
+      AsyncStorage.setItem("email", currentUser.email.toLowerCase());
+      navigation.navigate("Home");
     } else {
       setLoginError(true);
     }
   };
 
   return (
-    <View>
+    <View style={styles.outerContainer}>
       <NavbarTop />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      {loginError && <Text style={styles.error}>Invalid email or password</Text>}
-      <Button title="Login" onPress={handleLogin} />
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <View style={styles.formContainer}>
+          <Text style={styles.title}>Login</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            placeholderTextColor="#999"
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            placeholderTextColor="#999"
+          />
+          {loginError && (
+            <Text style={styles.error}>Invalid email or password</Text>
+          )}
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  outerContainer: {
+    flex: 1,
+    backgroundColor: "#f5f5f5",
+  },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    padding: 16,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  formContainer: {
+    width: '90%',
+    backgroundColor: "#fff",
+    padding: 20,
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+    textAlign: "center",
+    color: "#333",
   },
   input: {
-    height: 40,
-    borderColor: 'gray',
+    height: 50,
+    borderColor: "#ddd",
     borderWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 8,
+    borderRadius: 5,
+    marginBottom: 15,
+    paddingHorizontal: 15,
+    fontSize: 16,
+    color: "#333",
   },
   error: {
-    color: 'red',
-    marginBottom: 12,
+    color: "red",
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  button: {
+    backgroundColor: "#007BFF",
+    paddingVertical: 15,
+    borderRadius: 5,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
