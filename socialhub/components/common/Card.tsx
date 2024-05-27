@@ -121,12 +121,12 @@ function Card({
             {type !== "user" && (
               <View>
                 <View style={styles.cardContent}>
-                  {image && (
-                    <Image source={{ uri: image }} style={styles.image} />
-                  )}
                   <Text style={styles.title}>{title}</Text>
                   {description && (
                     <Text style={styles.description}>{description}</Text>
+                  )}
+                  {image && (
+                    <Image source={{ uri: image }} style={styles.image} />
                   )}
                 </View>
                 <View style={styles.cardActions}>
@@ -186,8 +186,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   image: {
-    width: 100,
-    height: 100,
+    marginTop:5,
+    width: 360,
+    height: 350,
     resizeMode: "cover",
   },
   title: {

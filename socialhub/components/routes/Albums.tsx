@@ -22,7 +22,7 @@ export default function Albums() {
   return (
     <View>
       <NavbarTop />
-      <ScrollView>
+      <ScrollView style={{marginBottom:70}}>
         {albums.map((album) => {
           const user = users.find((user) => user.id === album.userId);
           if (!user) {

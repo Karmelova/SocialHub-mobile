@@ -40,11 +40,14 @@ export default function AlbumPhotos({ route }) {
     return (
       <View>
         <NavbarTop />
+        <View style={{marginBottom:130}}>
+
         <FlatList
           data={photos}
           renderItem={renderPhotoItem}
           keyExtractor={(item) => item.id.toString()}
         />
+        </View>
       </View>
     );
   } else {

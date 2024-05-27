@@ -21,7 +21,7 @@ function Posts() {
   return (
     <View>
       <NavbarTop />
-      <ScrollView>
+      <ScrollView style={{marginBottom:70}}>
         {posts.map((post) => {
           const user = users.find((user) => user.id === post.userId);
           return (
