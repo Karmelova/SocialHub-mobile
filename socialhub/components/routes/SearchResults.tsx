@@ -1,5 +1,4 @@
-// SearchResults.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useGetUsers } from "../../api/users/useGetUsers";
 import { useGetPhoto } from "../../api/photos/UserGetPhoto";
@@ -10,10 +9,18 @@ const SearchResults = () => {
   const [matchingUsers, setMatchingUsers] = useState([]);
   const [matchingPhoto, setMatchingPhoto] = useState(null);
   const [matchingAlbum, setMatchingAlbum] = useState(null);
+  const inputRef = useRef(null); // Create a ref for the TextInput
 
   const userSearch = useGetUsers();
   const photoSearch = useGetPhoto(searchText);
   const albumSearch = useGetAlbumById(searchText);
+
+  // Focus on the input field after rendering
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   useEffect(() => {
     if (userSearch) {
@@ -42,26 +49,25 @@ const SearchResults = () => {
 
   return (
     <View>
-        <View style={{height:60, backgroundColor:"#211338", display:"flex", alignContent:"center", justifyContent:"center"}}>
+      <View style={{height:60, backgroundColor:"#211338", display:"flex", alignContent:"center", justifyContent:"center"}}>
         <View
-      style={{
-        display: "flex",
-        backgroundColor: 'white',
-        borderRadius: 8,
-        marginHorizontal: 10,
-        padding: 3,
-        height:30
-      }}
-      >
-        <TextInput
-          placeholder="Search..."
-          onChangeText={setSearchText}
-          value={searchText}
-          
-        />
-      </View>
+          style={{
+            display: "flex",
+            backgroundColor: 'white',
+            borderRadius: 8,
+            marginHorizontal: 10,
+            padding: 3,
+            height:30
+          }}
+        >
+          <TextInput
+            placeholder="Search..."
+            onChangeText={setSearchText}
+            value={searchText}
+            ref={inputRef} // Assign the ref to the TextInput
+          />
         </View>
-      
+      </View>
 
       <View>
         {searchText.length > 0 && (
@@ -103,6 +109,5 @@ const SearchResults = () => {
     </View>
   );
 };
-
 
 export default SearchResults;
