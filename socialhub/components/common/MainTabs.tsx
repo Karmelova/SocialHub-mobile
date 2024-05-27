@@ -21,6 +21,7 @@ const MainTabs = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
+      backBehavior="history"
       screenOptions={{
         tabBarStyle: { height: 60 },
       }}

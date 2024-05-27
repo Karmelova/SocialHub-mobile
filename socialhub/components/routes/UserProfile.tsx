@@ -6,6 +6,8 @@ import NavbarTop from "../common/NavbarTop";
 import StringAvatar from "../common/StringAvatar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import UserAlbums from "./UserAlbums";
+import UserPosts from "./UserPosts";
 
 export default function UserProfile({ route }) {
   const { userId } = route.params;
@@ -19,19 +21,17 @@ export default function UserProfile({ route }) {
 
   useEffect(() => {
     if (user && user.id) {
-      // Added null check for user and user.id
       setUserData(user);
     }
   }, [user]);
 
   if (user && user.id) {
-    // Added null check for user and user.id
     return (
       <View>
-        <NavbarTop></NavbarTop>
+        <NavbarTop />
         <ScrollView>
           <View style={styles.container}>
-            <StringAvatar userId={userId} name={user.name} color= "#d62246" size="xlarge" />
+            <StringAvatar userId={userId} name={user.name} color="#d62246" size="xlarge" />
             <View style={styles.centered}>
               <Text style={styles.name}>{user.name}</Text>
               <Text style={styles.username}>@{user.username}</Text>
@@ -39,85 +39,31 @@ export default function UserProfile({ route }) {
 
             <View>
               {user.email && (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginTop: 10,
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name="email"
-                    color="black"
-                    size={26}
-                  />
-                  <Text style={{ fontSize: 16, marginLeft: 5 }}>
-                    {user.email}
-                  </Text>
+                <View style={styles.infoContainer}>
+                  <MaterialCommunityIcons name="email" color="black" size={26} />
+                  <Text style={styles.infoText}>{user.email}</Text>
                 </View>
               )}
 
-              {user.address.city && (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginTop: 5,
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name="map-marker"
-                    color="black"
-                    size={26}
-                  />
-                  <Text style={{ fontSize: 16, marginLeft: 5 }}>
-                    {user.address.zipcode}/{user.address.city}
-                  </Text>
+              {user.address?.city && (
+                <View style={styles.infoContainer}>
+                  <MaterialCommunityIcons name="map-marker" color="black" size={26} />
+                  <Text style={styles.infoText}>{user.address.zipcode}/{user.address.city}</Text>
                 </View>
               )}
 
-              {user.company.name && (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginTop: 5,
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name="city-variant"
-                    color="black"
-                    size={26}
-                  />
-                  <Text style={{ fontSize: 16, marginLeft: 5 }}>
-                    {user.company.name}
-                  </Text>
+              {user.company?.name && (
+                <View style={styles.infoContainer}>
+                  <MaterialCommunityIcons name="city-variant" color="black" size={26} />
+                  <Text style={styles.infoText}>{user.company.name}</Text>
                 </View>
               )}
 
               {user.website && (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginTop: 5,
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name="search-web"
-                    color="black"
-                    size={26}
-                  />
-                  <TouchableOpacity
-                    onPress={() =>
-                      Linking.openURL("https://www." + user.website)
-                    }
-                  >
-                    <Text
-                      style={{ fontSize: 16, marginLeft: 5, color: "black" }}
-                    >
-                      {user.website}
-                    </Text>
+                <View style={styles.infoContainer}>
+                  <MaterialCommunityIcons name="search-web" color="black" size={26} />
+                  <TouchableOpacity onPress={() => Linking.openURL("https://www." + user.website)}>
+                    <Text style={styles.websiteText}>{user.website}</Text>
                   </TouchableOpacity>
                 </View>
               )}
@@ -128,33 +74,22 @@ export default function UserProfile({ route }) {
             value={value}
             onChange={handleChange}
             indicatorStyle={styles.tabIndicator}
-            
           >
             <Tab.Item
               title="POSTS"
               onPress={() => handleChange(0)}
-              titleStyle={
-                value === 0 ? styles.activeTabTitle : styles.inactiveTabTitle
-              }
+              titleStyle={value === 0 ? styles.activeTabTitle : styles.inactiveTabTitle}
             />
             <Tab.Item
               title="ALBUMS"
               onPress={() => handleChange(1)}
-              titleStyle={
-                value === 1 ? styles.activeTabTitle : styles.inactiveTabTitle
-              }
-            />
-            <Tab.Item
-              title="PHOTOS"
-              onPress={() => handleChange(2)}
-              titleStyle={
-                value === 2 ? styles.activeTabTitle : styles.inactiveTabTitle
-              }
+              titleStyle={value === 1 ? styles.activeTabTitle : styles.inactiveTabTitle}
             />
           </Tab>
           <Divider />
           <View style={styles.tabContent}>
-            {/* Render tab content based on selected tab */}
+            {value === 0 && <UserPosts userId={userId} userName={user.name} name={user.name} />}  
+            {value === 1 && <UserAlbums userId={userId} userName={user.name} name={user.name}/>}  
           </View>
         </ScrollView>
       </View>
@@ -189,7 +124,7 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
   },
   tabContent: {
-    marginTop: 20,
+    marginTop: 5,
   },
   activeTabTitle: {
     color: "#d62246",
@@ -197,4 +132,19 @@ const styles = StyleSheet.create({
   inactiveTabTitle: {
     color: "black",
   },
+  infoContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 10,
+  },
+  infoText: {
+    fontSize: 16,
+    marginLeft: 5,
+  },
+  websiteText: {
+    fontSize: 16,
+    marginLeft: 5,
+    color: "black",
+  },
 });
+
