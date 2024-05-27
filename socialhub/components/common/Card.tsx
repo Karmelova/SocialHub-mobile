@@ -37,6 +37,9 @@ function Card({
       case "album":
         deleteAlbum(id);
         break;
+      case "photo":
+        deletePhoto(id);
+        break;
       default:
         console.error("Unknown type:", type);
     }
@@ -60,6 +63,17 @@ function Card({
         method: "DELETE",
       });
       console.log("album deleted");
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
+
+  const deletePhoto = async (photoId) => {
+    try {
+      await fetch(`https://jsonplaceholder.typicode.com/photos/${photoId}`, {
+        method: "DELETE",
+      });
+      console.log("photo deleted");
     } catch (error) {
       console.error("Error deleting post:", error);
     }
@@ -93,8 +107,6 @@ function Card({
     navigation.navigate("UserProfile", { userId });
   };
 
-
-  
   return (
     <>
       {!isHidden && (
@@ -112,7 +124,10 @@ function Card({
                 <Text>@{userName}</Text>
               </View>
               {type === "user" && (
-                <TouchableOpacity style={{ alignSelf: "center" }}  onPress={navigateToUserProfile}>
+                <TouchableOpacity
+                  style={{ alignSelf: "center" }}
+                  onPress={navigateToUserProfile}
+                >
                   <Text style={styles.actionButton}>VIEW PROFILE</Text>
                 </TouchableOpacity>
               )}
@@ -142,8 +157,8 @@ function Card({
                   )}
                   {loggedInUserId === userId && (
                     <TouchableOpacity onPress={() => onPressDelete(type, id)}>
-                    <Text style={styles.deleteButton}>DELETE</Text>
-                  </TouchableOpacity>
+                      <Text style={styles.deleteButton}>DELETE</Text>
+                    </TouchableOpacity>
                   )}
                 </View>
               </View>
@@ -186,7 +201,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   image: {
-    marginTop:5,
+    marginTop: 5,
     width: 360,
     height: 350,
     resizeMode: "cover",
