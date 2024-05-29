@@ -15,6 +15,10 @@ export default function AlbumPhotos({ route }) {
   const userId = album ? album.userId : null;
   const user = useGetUser(userId ? String(userId) : "");
 
+  function viewResult(){
+    console.log(id, albumId)
+  }
+
   if (!photos) {
     return (
       <View style={styles.loaderContainer}>
@@ -51,10 +55,12 @@ export default function AlbumPhotos({ route }) {
       </View>
     );
   } else {
+    viewResult();
     return (
       <View>
         <NavbarTop />
-        <Text>This album does not contain any photos yet</Text>
+        <Text>This album does not contain any photos yet </Text>
+        
       </View>
     );
   }
