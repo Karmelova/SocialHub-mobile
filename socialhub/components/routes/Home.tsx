@@ -1,82 +1,137 @@
-import React from "react";
-import { ScrollView, Text } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import StringAvatar from "../common/StringAvatar";
-import { Avatar } from "react-native-elements";
+import React, { useState, useEffect } from "react";
+import { ScrollView, Text, View, Image, StyleSheet, Dimensions, ActivityIndicator } from "react-native";
+import NavbarTop from "../common/NavbarTop";
 
 export default function Home() {
-  return(<ScrollView>
-    <Text>
-      What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and
-      typesetting industry. Lorem Ipsum has been the industry's standard dummy
-      text ever since the 1500s, when an unknown printer took a galley of type
-      and scrambled it to make a type specimen book. It has survived not only
-      five centuries, but also the leap into electronic typesetting, remaining
-      essentially unchanged. It was popularised in the 1960s with the release of
-      Letraset sheets containing Lorem Ipsum passages, and more recently with
-      desktop publishing software like Aldus PageMaker including versions of
-      Lorem Ipsum. Why do we use it? It is a long established fact that a reader
-      will be distracted by the readable content of a page when looking at its
-      layout. The point of using Lorem Ipsum is that it has a more-or-less
-      normal distribution of letters, as opposed to using 'Content here, content
-      here', making it look like readable English. Many desktop publishing
-      packages and web page editors now use Lorem Ipsum as their default model
-      text, and a search for 'lorem ipsum' will uncover many web sites still in
-      their infancy. Various versions have evolved over the years, sometimes by
-      accident, sometimes on purpose (injected humour and the like). Where does
-      it come from? Contrary to popular belief, Lorem Ipsum is not simply random
-      text. It has roots in a piece of classical Latin literature from 45 BC,
-      making it over 2000 years old. Richard McClintock, a Latin professor at
-      Hampden-Sydney College in Virginia, looked up one of the more obscure
-      Latin words, consectetur, from a Lorem Ipsum passage, and going through
-      the cites of the word in classical literature, discovered the undoubtable
-      source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus
-      Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in
-      45 BC. This book is a treatise on the theory of ethics, very popular
-      during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor
-      sit amet..", comes from a line in section 1.10.32. The standard chunk of
-      Lorem Ipsum used since the 1500s is reproduced below for those interested.
-      Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by
-      Cicero are also reproduced in their exact original form, accompanied by
-      English versions from the 1914 translation by H. Rackham. Where can I get
-      some? There are many variations of passages of Lorem Ipsum available, but
-      the majority have suffered alteration in some form, by injected humour, or
-      randomised words which don't look even slightly believable. If you are
-      going to use a passage of Lorem Ipsum, you need to be sure there isn't
-      anything embarrassing hidden in the middle of text. All the Lorem Ipsum
-      generators on the Internet tend to repeat predefined chunks as necessary,
-      making this the first true generator on the Internet. It uses a dictionary
-      of over 200 Latin words, combined with a handful of model sentence
-      structures, to generate Lorem Ipsum which looks reasonable. The generated
-      Lorem Ipsum is therefore always free from repetition, injected humour, or
-      non-characteristic words etc.
-    </Text>
-    <Avatar
-  size="small"
-  rounded
-  title="MT"
-  onPress={() => console.log("Works!")}
-  activeOpacity={0.7}
-/>
-<Avatar
-  size="medium"
-  title="BP"
-  onPress={() => console.log("Works!")}
-  activeOpacity={0.7}
-/>
-<Avatar
-  size="large"
-  title="LW"
-  onPress={() => console.log("Works!")}
-  activeOpacity={0.7}
-/>
-<Avatar
-  size="xlarge"
-  rounded
-  title="CR"
-  onPress={() => console.log("Works!")}
-  activeOpacity={0.7}
-/>
-  </ScrollView>);
- ;
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const imageUrls = await Promise.all([
+          fetch("https://images.pexels.com/photos/2029596/pexels-photo-2029596.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1").then(res => res.url),
+          fetch("https://images.pexels.com/photos/745045/pexels-photo-745045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1").then(res => res.url),
+          fetch("https://images.pexels.com/photos/3856026/pexels-photo-3856026.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1").then(res => res.url),
+          fetch("https://images.pexels.com/photos/4406642/pexels-photo-4406642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1").then(res => res.url)
+        ]);
+        setImages(imageUrls);
+      } catch (error) {
+        console.error("Error fetching images:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchImages();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#007BFF" />
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.outerContainer}>
+      <NavbarTop />
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.container}>
+          <Text style={styles.title}>Welcome to SocialHub</Text>
+          <Text style={styles.subtitle}>Connect, share, and discover with SocialHub.</Text>
+
+          <Image source={{ uri: images[0] }} style={styles.image} />
+
+          <Text style={styles.sectionTitle}>Share Your Moments</Text>
+          <Text style={styles.text}>
+            Capture and share your favorite moments with friends and family. Upload photos, create albums, and tell your story.
+          </Text>
+
+          <Image source={{ uri: images[1] }} style={styles.image} />
+
+          <Text style={styles.sectionTitle}>Discover New Connections</Text>
+          <Text style={styles.text}>
+            Explore profiles, make new friends, and expand your social network. Connect with people who share your interests.
+          </Text>
+
+          <Image source={{ uri: images[2] }} style={styles.image} />
+
+          <Text style={styles.sectionTitle}>Stay Updated</Text>
+          <Text style={styles.text}>
+            Follow your friends and favorite creators to stay updated on their latest posts and activities.
+          </Text>
+
+          <Image source={{ uri: images[3] }} style={styles.image} />
+        </View>
+      </ScrollView>
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  outerContainer: {
+    flex: 1,
+    backgroundColor: "#f5f5f5",
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f5f5f5",
+  },
+  scrollView: {
+    flex: 1,
+  },
+  container: {
+    padding: 16,
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    marginBottom: 10,
+    color: "#333",
+    textAlign: "center",
+  },
+  subtitle: {
+    fontSize: 18,
+    marginBottom: 20,
+    color: "#666",
+    textAlign: "center",
+  },
+  image: {
+    width: Dimensions.get("window").width - 32,
+    height: 200,
+    borderRadius: 10,
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 10,
+    color: "#333",
+    textAlign: "center",
+  },
+  text: {
+    fontSize: 16,
+    color: "#666",
+    marginBottom: 20,
+    textAlign: "center",
+    paddingHorizontal: 16,
+  },
+  button: {
+    backgroundColor: "#007BFF",
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+    alignItems: "center",
+    marginTop: 20,
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+});

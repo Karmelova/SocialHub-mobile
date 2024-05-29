@@ -10,7 +10,12 @@ import Home from "../routes/Home";
 import Posts from "../routes/Posts";
 import Albums from "../routes/Albums";
 import Users from "../routes/Users";
-import Register from "../routes/Register";
+import LoginForm from "../routes/LoginForm";
+import UserProfile from "../routes/UserProfile";
+import PostDetails from "../routes/PostDetails";
+import AlbumPhotos from "../routes/AlbumPhotos";
+import SearchResults from "../routes/SearchResults";
+import PhotoDetails from "../routes/PhotoDetails";
 
 const Tab = createBottomTabNavigator();
 
@@ -18,85 +23,183 @@ const MainTabs = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      
+      backBehavior="history"
       screenOptions={{
-        tabBarStyle: { height: 60},
-        
+        tabBarStyle: { height: 60 },
       }}
       //@ts-ignore
       tabBarOptions={{
         labelStyle: {
-          fontSize: 16, // Rozmiar czcionki etykiet
-          fontWeight: "bold", // Pogrubienie czcionki etykiet
-          paddingBottom: 8, // Dodatkowy odstęp od dolnej krawędzi
+          fontSize: 14,
+          fontWeight: "bold",
+          paddingBottom: 8,
         },
-        // Możesz dodać więcej opcji stylizacji paska dolnego tutaj
       }}
     >
       <Tab.Screen
         name="Home"
         component={Home}
         options={{
-          tabBarLabel: "Home",
+          tabBarLabel: "HOME",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
           unmountOnBlur: true,
           headerShown: false,
-          tabBarActiveTintColor: '#d62246',
-          tabBarInactiveTintColor: 'lightgray',
-          tabBarInactiveBackgroundColor:'#211338',
-          tabBarActiveBackgroundColor:'#211338',
-          
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
         }}
-        
       />
       <Tab.Screen
         name="Posts"
         component={Posts}
         options={{
-          tabBarLabel: "Posts",
+          tabBarLabel: "POSTS",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="dots-grid" color={color} size={26} />
           ),
           unmountOnBlur: true,
           headerShown: false,
-          tabBarActiveTintColor: '#d62246',
-          tabBarInactiveTintColor: 'lightgray',
-          tabBarInactiveBackgroundColor:'#211338',
-          tabBarActiveBackgroundColor:'#211338'
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
         }}
       />
       <Tab.Screen
         name="Albums"
         component={Albums}
         options={{
-          tabBarLabel: "Albums",
+          tabBarLabel: "ALBUMS",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="image" color={color} size={26} />
           ),
           unmountOnBlur: true,
           headerShown: false,
-          tabBarActiveTintColor: '#d62246',
-          tabBarInactiveTintColor: 'lightgray',
-          tabBarInactiveBackgroundColor:'#211338',
-          tabBarActiveBackgroundColor:'#211338'
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
         }}
       />
       <Tab.Screen
         name="Users"
         component={Users}
         options={{
-          tabBarLabel: "Users",
+          tabBarLabel: "USERS",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={26} />
           ),
           unmountOnBlur: true,
           headerShown: false,
-          tabBarActiveTintColor: '#d62246',
-          tabBarInactiveTintColor: 'lightgray',
-          tabBarInactiveBackgroundColor:'#211338',
-          tabBarActiveBackgroundColor:'#211338'
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
+        }}
+      />
+      <Tab.Screen
+        name="LoginForm"
+        component={LoginForm}
+        options={{
+          tabBarLabel: "LoginForm",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+          unmountOnBlur: true,
+          headerShown: false,
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
+          tabBarButton: () => null,
+        }}
+      />
+      <Tab.Screen
+        name="UserProfile"
+        component={UserProfile}
+        options={{
+          tabBarLabel: "UserProfile",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+          unmountOnBlur: true,
+          headerShown: false,
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
+          tabBarButton: () => null,
+        }}
+      />
+      <Tab.Screen
+        name="PostDetails"
+        component={PostDetails}
+        options={{
+          tabBarLabel: "PostDetails",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+          unmountOnBlur: true,
+          headerShown: false,
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
+          tabBarButton: () => null,
+        }}
+      />
+      <Tab.Screen
+        name="AlbumPhotos"
+        component={AlbumPhotos}
+        options={{
+          tabBarLabel: "AlbumPhotos",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+          unmountOnBlur: true,
+          headerShown: false,
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
+          tabBarButton: () => null,
+        }}
+      />
+      <Tab.Screen
+        name="SearchResults"
+        component={SearchResults}
+        options={{
+          tabBarLabel: "SearchResults",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+          unmountOnBlur: true,
+          headerShown: false,
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
+          tabBarButton: () => null,
+        }}
+      />
+      <Tab.Screen
+        name="PhotoDetails"
+        component={PhotoDetails}
+        options={{
+          tabBarLabel: "PhotoDetails",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+          unmountOnBlur: true,
+          headerShown: false,
+          tabBarActiveTintColor: "#d62246",
+          tabBarInactiveTintColor: "lightgray",
+          tabBarInactiveBackgroundColor: "#211338",
+          tabBarActiveBackgroundColor: "#211338",
+          tabBarButton: () => null,
         }}
       />
     </Tab.Navigator>
