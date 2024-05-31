@@ -27,7 +27,7 @@ export default function PhotoDetails({ route }) {
   return (
     <View style={styles.container}>
       <NavbarTop />
-      <View style={styles.contentContainer}>
+      <View>
         <Card
           type="photo"
           id={photo.id}
